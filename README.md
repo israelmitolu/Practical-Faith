@@ -1,5 +1,6 @@
 <div align="center">
-  <h1>Practical Faith ✝️</h1>
+  <img src="public/images/logo.svg" alt="Practical Faith Logo" width="100" height="100" />
+  <h1>Practical Faith</h1>
   <p>A modern web app for daily biblical confessions and affirmations to strengthen your faith journey.</p>
 </div>
 
@@ -9,6 +10,17 @@
   <img src="https://img.shields.io/badge/Vite-5.4.1-purple" alt="Vite Version" />
   <img src="https://img.shields.io/badge/Tailwind-3.4.11-teal" alt="Tailwind Version" />
 </div>
+
+## 🎨 Brand Colors
+
+| Color        | Hex Code | Preview                                                                   |
+| ------------ | -------- | ------------------------------------------------------------------------- |
+| Primary Blue | #47abff  | <div style="background-color: #47abff; width: 20px; height: 20px;"></div> |
+| Light Blue   | #7ac2ff  | <div style="background-color: #7ac2ff; width: 20px; height: 20px;"></div> |
+| Bright Blue  | #1494ff  | <div style="background-color: #1494ff; width: 20px; height: 20px;"></div> |
+| Pure White   | #ffffff  | <div style="background-color: #ffffff; width: 20px; height: 20px;"></div> |
+| Dark Navy    | #041635  | <div style="background-color: #041635; width: 20px; height: 20px;"></div> |
+| Light Gray   | #e6e6e6  | <div style="background-color: #e6e6e6; width: 20px; height: 20px;"></div> |
 
 ## 🌟 About
 
@@ -46,8 +58,8 @@ git clone https://github.com/israelmitolu/Practical-Faith.git
 2. Install dependencies:
 
 ```bash
-    cd Practical-Faith
-    npm install
+cd Practical-Faith
+npm install
 ```
 
 3. Start the development server:
@@ -74,6 +86,6 @@ npm run dev
 
 ## 📞 Contact
 
-For questions, suggestions, or to share testimonies about how this app has blessed you, please open an issue in the repository.
+For questions, suggestions, or to share testimonies about how this app has blessed you, please open an issue in the repository, or contact me on [Twitter](https://x.com/israelmitolu).
 
 ---
