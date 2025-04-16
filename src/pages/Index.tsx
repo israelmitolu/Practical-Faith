@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Header } from "@/components/Header";
 import { MoodSelector } from "@/components/MoodSelector";
 import { ConfessionCard } from "@/components/ConfessionCard";
 import { BackgroundPattern } from "@/components/BackgroundPattern";
 import { BottomNavbar } from "@/components/BottomNavbar";
+import { Preloader } from "@/components/Preloader";
 import {
   confessions,
   getConfessionsByMood,
@@ -26,6 +28,7 @@ const Index = () => {
     null
   );
   const [userConfessions, setUserConfessions] = useState<Confession[]>([]);
+  const [isPreloaderComplete, setIsPreloaderComplete] = useState(false);
 
   useEffect(() => {
     // Set the daily confession
@@ -80,73 +83,141 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-divine-light/30 pb-24">
-      <BackgroundPattern />
-      <Header />
+    <>
+      <Preloader onComplete={() => setIsPreloaderComplete(true)} />
 
-      <main className="max-w-5xl mx-auto px-4">
-        {/* Daily Confession */}
-        {dailyConfession && (
-          <div className="mb-10">
-            <h2 className="text-2xl font-script text-divine-blue mb-4 text-center">
-              Today's Confessions
-            </h2>
-            <div className="max-w-2xl mx-auto">
-              <ConfessionCard confession={dailyConfession} />
-            </div>
-          </div>
-        )}
+      <AnimatePresence>
+        {isPreloaderComplete && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="min-h-screen bg-divine-light/30 pb-24"
+          >
+            <BackgroundPattern />
+            <Header />
 
-        {/* Mood Selector */}
-        <MoodSelector onSelectMood={handleSelectMood} />
+            <main className="max-w-5xl mx-auto px-4">
+              {/* Daily Confession */}
+              <AnimatePresence>
+                {dailyConfession && (
+                  <motion.div
+                    initial={{ y: -20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -20, opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="mb-10"
+                  >
+                    <motion.h2
+                      initial={{ scale: 0.9, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: 0.2 }}
+                      className="text-2xl font-script text-divine-blue mb-4 text-center"
+                    >
+                      Today's Confessions
+                    </motion.h2>
+                    <div className="max-w-2xl mx-auto">
+                      <ConfessionCard confession={dailyConfession} />
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
-        {/* Filters indicator */}
-        {(selectedMood || selectedCategory) && (
-          <div className="flex items-center justify-between mb-6 mt-6 bg-white/70 backdrop-blur-sm p-3 rounded-lg shadow-sm border border-divine-light/50">
-            <p className="text-divine-blue font-handwritten text-lg">
-              {selectedMood &&
-                `Showing confessions for when you feel ${selectedMood}`}
-              {selectedCategory !== "my-confessions" &&
-                `Showing ${selectedCategory} confessions`}
-              {selectedCategory === "my-confessions" &&
-                `Showing your confessions`}
-            </p>
-            <button
-              onClick={handleResetFilters}
-              className="text-sm text-divine-blue underline hover:text-divine-blue/80 font-elegant"
+              {/* Mood Selector */}
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                <MoodSelector onSelectMood={handleSelectMood} />
+              </motion.div>
+
+              {/* Filters indicator */}
+              <AnimatePresence>
+                {(selectedMood || selectedCategory) && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex items-center justify-between mb-6 mt-6 bg-white/70 backdrop-blur-sm p-3 rounded-lg shadow-sm border border-divine-light/50"
+                  >
+                    <p className="text-divine-blue font-handwritten text-lg">
+                      {selectedMood &&
+                        `Showing confessions for when you feel ${selectedMood}`}
+                      {selectedCategory !== "my-confessions" &&
+                        `Showing ${selectedCategory} confessions`}
+                      {selectedCategory === "my-confessions" &&
+                        `Showing your confessions`}
+                    </p>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={handleResetFilters}
+                      className="text-sm text-divine-blue underline hover:text-divine-blue/80 font-elegant"
+                    >
+                      Reset filters
+                    </motion.button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Confessions Grid */}
+              <AnimatePresence mode="wait">
+                {displayedConfessions.length > 0 ? (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-6"
+                  >
+                    {displayedConfessions.map((confession, index) => (
+                      <motion.div
+                        key={confession.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <ConfessionCard
+                          confession={confession}
+                          onDelete={handleConfessionAdded}
+                        />
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-center py-8 bg-white/70 backdrop-blur-sm p-6 rounded-lg shadow-sm"
+                  >
+                    <p className="text-divine-blue font-elegant text-xl">
+                      No confessions found. Please try another category or mood.
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </main>
+
+            <motion.div
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.5 }}
             >
-              Reset filters
-            </button>
-          </div>
-        )}
-
-        {/* Confessions Grid */}
-        {displayedConfessions.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-6">
-            {displayedConfessions.map((confession) => (
-              <ConfessionCard
-                key={confession.id}
-                confession={confession}
-                onDelete={handleConfessionAdded}
+              <BottomNavbar
+                onSelectCategory={handleSelectCategory}
+                selectedCategory={selectedCategory}
+                onConfessionAdded={handleConfessionAdded}
               />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-8 bg-white/70 backdrop-blur-sm p-6 rounded-lg shadow-sm">
-            <p className="text-divine-blue font-elegant text-xl">
-              No confessions found. Please try another category or mood.
-            </p>
-          </div>
+            </motion.div>
+            <Toaster position="bottom-center" />
+          </motion.div>
         )}
-      </main>
-
-      <BottomNavbar
-        onSelectCategory={handleSelectCategory}
-        selectedCategory={selectedCategory}
-        onConfessionAdded={handleConfessionAdded}
-      />
-      <Toaster position="bottom-center" />
-    </div>
+      </AnimatePresence>
+    </>
   );
 };
 
