@@ -24,16 +24,17 @@ export const Header = () => {
   };
 
   return (
-    <header className="py-6 mb-4">
+    <header className="py-6 mb-4 bg-white/60 backdrop-blur-md border-b border-divine-light/50 shadow-sm">
       <div className="max-w-5xl mx-auto px-4">
         <div className="flex flex-col items-center justify-between space-y-2 md:flex-row md:space-y-0 md:space-x-4">
           <div className="text-center md:text-left">
-            <h1 className="text-3xl font-bold text-divine-gradient">
+            <h1 className="text-4xl font-script text-divine-gradient">
               Biblical Confessions
             </h1>
             {name && (
-              <p className="text-lg text-divine-blue mt-1 animate-fade-in">
-                {getGreeting()}, <span className="font-medium">{name}</span>
+              <p className="text-xl text-divine-blue mt-1 animate-fade-in font-elegant">
+                {getGreeting()},{" "}
+                <span className="font-calligraphy text-2xl">{name}</span>
               </p>
             )}
           </div>
@@ -43,7 +44,7 @@ export const Header = () => {
             <Button
               variant="outline"
               onClick={() => setShowModal(true)}
-              className="border-divine-blue/20 text-divine-blue hover:bg-divine-blue/10"
+              className="border-divine-blue/20 bg-white/70 backdrop-blur-sm text-divine-blue hover:bg-divine-blue/10 font-handwritten shadow-sm"
             >
               {name ? "Change Name" : "Set Your Name"}
             </Button>
