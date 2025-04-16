@@ -51,7 +51,7 @@ export const PersonalizationModal = ({
         <DialogHeader>
           <DialogTitle className="text-xl font-serif text-divine-blue">Personalize Your Experience</DialogTitle>
           <DialogDescription>
-            Enter your name to personalize your daily declarations.
+            Enter your name to personalize your daily confessions.
           </DialogDescription>
         </DialogHeader>
         <div className="py-4">
