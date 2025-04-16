@@ -35,7 +35,7 @@ export const CelebrationModal = ({
           />
           <h3 className="text-2xl font-elegant text-divine-blue mt-6 text-center">
             {isToday
-              ? "Hallelujah! You've confessed the word 's truth today! 🙌"
+              ? "Gloryyy! You've confessed the truth of God's word today! 🙌"
               : "Hallelujah! You've confessed this truth! 🙌"}
           </h3>
         </div>
