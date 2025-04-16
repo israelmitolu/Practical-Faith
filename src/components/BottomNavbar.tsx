@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Home, Bookmark, PlusCircle, X } from "lucide-react";
+import { Home, PlusCircle, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { CategorySelector } from "@/components/CategorySelector";
 import { Category } from "@/lib/types";
+import { CategoriesDrawer } from "@/components/CategoriesDrawer";
+import { saveConfession } from "@/lib/utils";
 
 type NewConfessionFormData = {
   text: string;
@@ -13,14 +14,15 @@ type NewConfessionFormData = {
 interface BottomNavbarProps {
   onSelectCategory: (category: Category) => void;
   selectedCategory: Category | null;
+  onConfessionAdded?: () => void;
 }
 
 export const BottomNavbar = ({
   onSelectCategory,
   selectedCategory,
+  onConfessionAdded,
 }: BottomNavbarProps) => {
   const [showAddForm, setShowAddForm] = useState(false);
-  const [showCategories, setShowCategories] = useState(false);
   const [formData, setFormData] = useState<NewConfessionFormData>({
     text: "",
     categories: [],
@@ -28,17 +30,11 @@ export const BottomNavbar = ({
 
   const handleAddConfession = () => {
     setShowAddForm(true);
-    setShowCategories(false);
-  };
-
-  const handleShowCategories = () => {
-    setShowCategories(true);
-    setShowAddForm(false);
   };
 
   const handleHomeClick = () => {
-    setShowCategories(false);
-    setShowAddForm(false);
+    // Reset any selected category
+    onSelectCategory(null);
   };
 
   const handleCloseForm = () => {
@@ -48,11 +44,22 @@ export const BottomNavbar = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would add logic to save the confession
-    console.log("Saving confession:", formData);
 
-    // In a real app, you would call an API to save the data
-    // For demo purposes, we'll just close the form
+    // Create a new confession object
+    const newConfession = {
+      id: Date.now().toString(), // Simple unique ID
+      text: formData.text,
+      categories: formData.categories,
+      createdAt: new Date(),
+    };
+
+    // Save to localStorage
+    saveConfession(newConfession);
+
+    // Notify parent component
+    onConfessionAdded?.();
+
+    // Close the form
     handleCloseForm();
   };
 
@@ -94,38 +101,16 @@ export const BottomNavbar = ({
             className="flex flex-col items-center gap-1 h-auto py-2"
             onClick={handleHomeClick}
           >
-            <Home
-              className={`h-6 w-6 ${
-                !showCategories ? "text-divine-blue" : "text-divine-blue/60"
-              }`}
-            />
-            <span
-              className={`text-xs font-calligraphy text-base ${
-                !showCategories ? "text-divine-blue" : "text-divine-blue/60"
-              }`}
-            >
+            <Home className="h-6 w-6 text-divine-blue" />
+            <span className="text-xs font-calligraphy text-base text-divine-blue">
               Home
             </span>
           </Button>
 
-          <Button
-            variant="ghost"
-            className="flex flex-col items-center gap-1 h-auto py-2"
-            onClick={handleShowCategories}
-          >
-            <Bookmark
-              className={`h-6 w-6 ${
-                showCategories ? "text-divine-blue" : "text-divine-blue/60"
-              }`}
-            />
-            <span
-              className={`text-xs font-calligraphy text-base ${
-                showCategories ? "text-divine-blue" : "text-divine-blue/60"
-              }`}
-            >
-              Categories
-            </span>
-          </Button>
+          <CategoriesDrawer
+            onSelectCategory={onSelectCategory}
+            selectedCategory={selectedCategory}
+          />
 
           <Button
             onClick={handleAddConfession}
@@ -136,19 +121,6 @@ export const BottomNavbar = ({
           </Button>
         </div>
       </div>
-
-      {/* Categories Panel */}
-      {showCategories && (
-        <div className="fixed bottom-[80px] left-0 right-0 bg-white/90 backdrop-blur-md p-6 border-t border-divine-light/50 shadow-lg z-30 max-h-[70vh] overflow-y-auto transition-all duration-300 ease-in-out">
-          <h2 className="text-2xl font-script text-divine-blue mb-4 text-center">
-            Explore by Category
-          </h2>
-          <CategorySelector
-            onSelectCategory={onSelectCategory}
-            selectedCategory={selectedCategory}
-          />
-        </div>
-      )}
 
       {/* Add Confession Form */}
       {showAddForm && (

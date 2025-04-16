@@ -12,6 +12,7 @@ import {
 } from "@/lib/data";
 import { Category, Confession, Mood } from "@/lib/types";
 import { Toaster } from "@/components/ui/sonner";
+import { getStoredConfessions } from "@/lib/utils";
 
 const Index = () => {
   const [selectedMood, setSelectedMood] = useState<Mood | null>(null);
@@ -24,10 +25,15 @@ const Index = () => {
   const [dailyConfession, setDailyConfession] = useState<Confession | null>(
     null
   );
+  const [userConfessions, setUserConfessions] = useState<Confession[]>([]);
 
   useEffect(() => {
     // Set the daily confession
     setDailyConfession(getDailyConfession());
+
+    // Load user's stored confessions
+    const storedConfessions = getStoredConfessions();
+    setUserConfessions(storedConfessions);
 
     // Initialize with all confessions
     setDisplayedConfessions(confessions.slice(0, 6));
@@ -41,8 +47,11 @@ const Index = () => {
     } else if (selectedCategory) {
       const categoryConfessions = getConfessionsByCategory(selectedCategory);
       setDisplayedConfessions(categoryConfessions);
+    } else {
+      // Show both predefined and user confessions when no filter is selected
+      setDisplayedConfessions([...confessions.slice(0, 6), ...userConfessions]);
     }
-  }, [selectedMood, selectedCategory]);
+  }, [selectedMood, selectedCategory, userConfessions]);
 
   const handleSelectMood = (mood: Mood) => {
     setSelectedMood(mood);
@@ -57,6 +66,12 @@ const Index = () => {
     setSelectedMood(null);
     setSelectedCategory(null);
     setDisplayedConfessions(confessions.slice(0, 6));
+  };
+
+  const handleConfessionAdded = () => {
+    // Reload stored confessions
+    const storedConfessions = getStoredConfessions();
+    setUserConfessions(storedConfessions);
   };
 
   return (
@@ -101,7 +116,11 @@ const Index = () => {
         {displayedConfessions.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-6">
             {displayedConfessions.map((confession) => (
-              <ConfessionCard key={confession.id} confession={confession} />
+              <ConfessionCard 
+                key={confession.id} 
+                confession={confession}
+                onDelete={handleConfessionAdded}
+              />
             ))}
           </div>
         ) : (
@@ -116,6 +135,7 @@ const Index = () => {
       <BottomNavbar
         onSelectCategory={handleSelectCategory}
         selectedCategory={selectedCategory}
+        onConfessionAdded={handleConfessionAdded}
       />
       <Toaster position="bottom-center" />
     </div>
