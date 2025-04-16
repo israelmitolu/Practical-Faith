@@ -231,6 +231,7 @@ export const categoryLabels: Record<string, string> = {
   strength: "Strength",
   identity: "Identity",
   daily: "Daily",
+  "my-confessions": "My Confessions",
 };
 
 export const getDailyConfession = (): Confession => {

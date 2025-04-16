@@ -45,8 +45,13 @@ const Index = () => {
       const moodConfessions = getConfessionsByMood(selectedMood);
       setDisplayedConfessions(moodConfessions);
     } else if (selectedCategory) {
-      const categoryConfessions = getConfessionsByCategory(selectedCategory);
-      setDisplayedConfessions(categoryConfessions);
+      if (selectedCategory === "my-confessions") {
+        // Show only user-added confessions
+        setDisplayedConfessions(userConfessions);
+      } else {
+        const categoryConfessions = getConfessionsByCategory(selectedCategory);
+        setDisplayedConfessions(categoryConfessions);
+      }
     } else {
       // Show both predefined and user confessions when no filter is selected
       setDisplayedConfessions([...confessions.slice(0, 6), ...userConfessions]);
@@ -101,7 +106,10 @@ const Index = () => {
             <p className="text-divine-blue font-handwritten text-lg">
               {selectedMood &&
                 `Showing confessions for when you feel ${selectedMood}`}
-              {selectedCategory && `Showing ${selectedCategory} confessions`}
+              {selectedCategory !== "my-confessions" &&
+                `Showing ${selectedCategory} confessions`}
+              {selectedCategory === "my-confessions" &&
+                `Showing your confessions`}
             </p>
             <button
               onClick={handleResetFilters}
@@ -116,8 +124,8 @@ const Index = () => {
         {displayedConfessions.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-6">
             {displayedConfessions.map((confession) => (
-              <ConfessionCard 
-                key={confession.id} 
+              <ConfessionCard
+                key={confession.id}
                 confession={confession}
                 onDelete={handleConfessionAdded}
               />
