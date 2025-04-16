@@ -97,11 +97,16 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Playfair Display", serif;
   }
 }
 
@@ -109,7 +114,7 @@
   .bg-divine-gradient {
     @apply bg-gradient-to-br from-white to-divine-light;
   }
-  
+
   .text-divine-gradient {
     @apply bg-gradient-to-r from-divine-blue to-divine-accent bg-clip-text text-transparent;
   }

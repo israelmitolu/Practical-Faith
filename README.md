@@ -24,7 +24,7 @@
 
 ## 🌟 About
 
-Daily Biblical Confessions is a beautiful web application designed to strengthen your faith through the power of God's Word. This app provides daily biblical confessions and affirmations based on God's promises, helping you speak life and truth into your daily walk with Christ.
+Daily Biblical Confessions is a beautiful web application designed to strengthen your faith through the power of God's Word. This app provides daily biblical confessions and affirmations based on God's promises, helping you speak life and truth into your daily life.
 
 ## ✨ Features
 

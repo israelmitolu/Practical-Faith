@@ -40,3 +40,27 @@
 .read-the-docs {
   color: #888;
 }
+
+@keyframes draw {
+  to {
+    strokedashoffset: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
+}
