@@ -8,6 +8,7 @@ export interface Confession {
 }
 
 export type Category =
+  | "my-confessions"
   | "faith"
   | "peace"
   | "healing"

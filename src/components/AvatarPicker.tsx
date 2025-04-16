@@ -32,7 +32,7 @@ export const AvatarPicker = () => {
     try {
       const avatar = createAvatar(micah, {
         seed,
-        eyebrows: ["up", "eyelashesUp"],
+        eyebrows: ["up"],
         hair: ["pixie", "mrClean", "full", "fonze", "dannyPhantom"],
         hairColor: [
           "000000",

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Category } from "@/lib/types";
 import { categoryLabels } from "@/lib/data";
@@ -18,11 +17,8 @@ export const CategorySelector = ({
 
   return (
     <div className="mb-8 animate-fade-in">
-      <h2 className="text-lg font-medium text-divine-blue mb-3 text-center sm:text-left">
-        Explore by Category
-      </h2>
       <ScrollArea className="whitespace-nowrap pb-4">
-        <div className="flex space-x-2 w-max min-w-full px-1">
+        <div className="flex space-x-2 w-max min-w-full px-1 font-serif">
           {categories.map((category) => (
             <Button
               key={category}
