@@ -29,7 +29,7 @@ export const CelebrationModal = ({
             </div>
           )}
           <img
-            src="/Happy Chris Pratt GIF by Parks and Recreation.gif"
+            src="/images/Happy Chris Pratt GIF by Parks and Recreation.gif"
             alt="Excited Celebration"
             className="w-full max-w-[400px] rounded-lg shadow-lg"
           />
