@@ -62,7 +62,7 @@ const Index = () => {
         {/* Daily Confession */}
         {dailyConfession && (
           <div className="mb-10">
-            <h2 className="text-2xl font-serif text-divine-blue mb-4 text-center">Today's Declaration</h2>
+            <h2 className="text-2xl font-serif text-divine-blue mb-4 text-center">Today's Confessions</h2>
             <div className="max-w-2xl mx-auto">
               <ConfessionCard confession={dailyConfession} />
             </div>
@@ -82,8 +82,8 @@ const Index = () => {
         {(selectedMood || selectedCategory) && (
           <div className="flex items-center justify-between mb-6">
             <p className="text-divine-blue">
-              {selectedMood && `Showing declarations for when you feel ${selectedMood}`}
-              {selectedCategory && `Showing ${selectedCategory} declarations`}
+              {selectedMood && `Showing confessions for when you feel ${selectedMood}`}
+              {selectedCategory && `Showing ${selectedCategory} confessions`}
             </p>
             <button
               onClick={handleResetFilters}
@@ -103,7 +103,7 @@ const Index = () => {
           </div>
         ) : (
           <div className="text-center py-8">
-            <p className="text-divine-blue">No declarations found. Please try another category or mood.</p>
+            <p className="text-divine-blue">No confessions found. Please try another category or mood.</p>
           </div>
         )}
       </main>
