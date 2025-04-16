@@ -1,12 +1,12 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { PersonalizationModal } from "./PersonalizationModal";
+import { AvatarPicker } from "./AvatarPicker";
 
 export const Header = () => {
   const [name, setName] = useState<string>("");
   const [showModal, setShowModal] = useState<boolean>(false);
-  
+
   useEffect(() => {
     const savedName = localStorage.getItem("userName");
     if (savedName) {
@@ -15,14 +15,14 @@ export const Header = () => {
       setShowModal(true);
     }
   }, []);
-  
+
   const getGreeting = () => {
     const hour = new Date().getHours();
     if (hour < 12) return "Good morning";
     if (hour < 18) return "Good afternoon";
     return "Good evening";
   };
-  
+
   return (
     <header className="py-6 mb-4">
       <div className="max-w-5xl mx-auto px-4">
@@ -37,19 +37,22 @@ export const Header = () => {
               </p>
             )}
           </div>
-          
-          <Button 
-            variant="outline" 
-            onClick={() => setShowModal(true)}
-            className="border-divine-blue/20 text-divine-blue hover:bg-divine-blue/10"
-          >
-            {name ? "Change Name" : "Set Your Name"}
-          </Button>
+
+          <div className="flex items-center gap-4">
+            <AvatarPicker />
+            <Button
+              variant="outline"
+              onClick={() => setShowModal(true)}
+              className="border-divine-blue/20 text-divine-blue hover:bg-divine-blue/10"
+            >
+              {name ? "Change Name" : "Set Your Name"}
+            </Button>
+          </div>
         </div>
       </div>
-      
-      <PersonalizationModal 
-        open={showModal} 
+
+      <PersonalizationModal
+        open={showModal}
         onOpenChange={setShowModal}
         name={name}
         setName={setName}
