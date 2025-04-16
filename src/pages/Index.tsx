@@ -145,7 +145,8 @@ const Index = () => {
                     <p className="text-divine-blue font-handwritten text-lg">
                       {selectedMood &&
                         `Showing confessions for when you feel ${selectedMood}`}
-                      {selectedCategory !== "my-confessions" &&
+                      {selectedCategory &&
+                        selectedCategory !== "my-confessions" &&
                         `Showing ${selectedCategory} confessions`}
                       {selectedCategory === "my-confessions" &&
                         `Showing your confessions`}
@@ -202,17 +203,11 @@ const Index = () => {
               </AnimatePresence>
             </main>
 
-            <motion.div
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.5 }}
-            >
-              <BottomNavbar
-                onSelectCategory={handleSelectCategory}
-                selectedCategory={selectedCategory}
-                onConfessionAdded={handleConfessionAdded}
-              />
-            </motion.div>
+            <BottomNavbar
+              onSelectCategory={handleSelectCategory}
+              selectedCategory={selectedCategory}
+              onConfessionAdded={handleConfessionAdded}
+            />
             <Toaster position="bottom-center" />
           </motion.div>
         )}
