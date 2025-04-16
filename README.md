@@ -72,10 +72,7 @@ npm run dev
 - **State Management**: React Query
 - **Routing**: React Router
 
-## Credits
 
-- All glory to God for His Word and inspiration
-- The Christian community for their support and feedback
 
 ## 📞 Contact
 
