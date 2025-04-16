@@ -24,17 +24,17 @@ export const Header = () => {
   };
 
   return (
-    <header className="py-6 mb-4 bg-white/60 backdrop-blur-md border-b border-divine-light/50 shadow-sm">
+    <header className="py-6 mb-4 bg-white/40 backdrop-blur-md border-b border-divine-light/50 shadow-sm">
       <div className="max-w-5xl mx-auto px-4">
         <div className="flex flex-col items-center justify-between space-y-2 md:flex-row md:space-y-0 md:space-x-4">
           <div className="text-center md:text-left">
-            <h1 className="text-4xl font-script text-divine-gradient">
+            <h1 className="text-3xl md:text-4xl font-script text-divine-gradient">
               Biblical Confessions
             </h1>
             {name && (
-              <p className="text-xl text-divine-blue mt-1 animate-fade-in font-elegant">
+              <p className="text-lg md:text-xl text-divine-blue mt-1 animate-fade-in font-elegant">
                 {getGreeting()},{" "}
-                <span className="font-calligraphy text-2xl">{name}</span>
+                <span className="font-calligraphy text-xl md:text-2xl">{name} ✨</span>
               </p>
             )}
           </div>
