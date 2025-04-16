@@ -29,7 +29,7 @@ export const Header = () => {
         <div className="flex flex-col items-center justify-between space-y-2 md:flex-row md:space-y-0 md:space-x-4">
           <div className="text-center md:text-left">
             <h1 className="text-3xl font-bold text-divine-gradient">
-              Daily Divine Declarations
+              Biblical Confessions
             </h1>
             {name && (
               <p className="text-lg text-divine-blue mt-1 animate-fade-in">

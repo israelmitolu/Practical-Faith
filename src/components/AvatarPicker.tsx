@@ -14,21 +14,6 @@ import {
 const AVATAR_COUNT = 20;
 const AVATAR_STORAGE_KEY = "user_avatar_seed";
 
-const AVATAR_CONFIG = {
-  hair: ["pixie", "mrClean", "full", "fonze", "dannyPhantom"],
-  hairColor: [
-    "000000",
-    "77311d",
-    "ac6651",
-    "f4d150",
-    "f9c9b6",
-    "ffeba4",
-    "ffffff",
-    "fc909f",
-  ],
-  mouth: ["laughing", "pucker", "smile", "smirk"],
-};
-
 type AvatarSeed = string;
 
 interface AvatarData {
@@ -47,7 +32,19 @@ export const AvatarPicker = () => {
     try {
       const avatar = createAvatar(micah, {
         seed,
-        ...AVATAR_CONFIG,
+        eyebrows: ["up", "eyelashesUp"],
+        hair: ["pixie", "mrClean", "full", "fonze", "dannyPhantom"],
+        hairColor: [
+          "000000",
+          "77311d",
+          "ac6651",
+          "f4d150",
+          "f9c9b6",
+          "ffeba4",
+          "ffffff",
+          "fc909f",
+        ],
+        mouth: ["laughing", "pucker", "smile", "smirk"],
       });
       const svg = await avatar.toString();
       setAvatarSvg(svg);
@@ -67,7 +64,19 @@ export const AvatarPicker = () => {
           const randomSeed = Math.random().toString(36).substring(7);
           const avatar = createAvatar(micah, {
             seed: randomSeed,
-            ...AVATAR_CONFIG,
+            eyebrows: ["up", "eyelashesUp"],
+            hair: ["pixie", "mrClean", "full", "fonze", "dannyPhantom"],
+            hairColor: [
+              "000000",
+              "77311d",
+              "ac6651",
+              "f4d150",
+              "f9c9b6",
+              "ffeba4",
+              "ffffff",
+              "fc909f",
+            ],
+            mouth: ["laughing", "pucker", "smile", "smirk"],
           });
           const svg = await avatar.toString();
           return { svg, seed: randomSeed };
@@ -127,12 +136,14 @@ export const AvatarPicker = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" className="p-0 h-auto">
+        <div className="relative p-1 h-auto group">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="absolute inset-0 animate-pulse-slow bg-white/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div
-            className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center cursor-pointer hover:bg-white/20 transition-colors"
+            className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center cursor-pointer hover:bg-white/20 transition-colors"
             dangerouslySetInnerHTML={{ __html: avatarSvg }}
           />
-        </Button>
+        </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
