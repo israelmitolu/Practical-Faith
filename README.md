@@ -11,17 +11,6 @@
   <img src="https://img.shields.io/badge/Tailwind-3.4.11-teal" alt="Tailwind Version" />
 </div>
 
-## 🎨 Brand Colors
-
-| Color        | Hex Code | Preview                                                                   |
-| ------------ | -------- | ------------------------------------------------------------------------- |
-| Primary Blue | #47abff  | <div style="background-color: #47abff; width: 20px; height: 20px;"></div> |
-| Light Blue   | #7ac2ff  | <div style="background-color: #7ac2ff; width: 20px; height: 20px;"></div> |
-| Bright Blue  | #1494ff  | <div style="background-color: #1494ff; width: 20px; height: 20px;"></div> |
-| Pure White   | #ffffff  | <div style="background-color: #ffffff; width: 20px; height: 20px;"></div> |
-| Dark Navy    | #041635  | <div style="background-color: #041635; width: 20px; height: 20px;"></div> |
-| Light Gray   | #e6e6e6  | <div style="background-color: #e6e6e6; width: 20px; height: 20px;"></div> |
-
 ## 🌟 About
 
 Daily Biblical Confessions is a beautiful web application designed to strengthen your faith through the power of God's Word. This app provides daily biblical confessions and affirmations based on God's promises, helping you speak life and truth into your daily life.
@@ -39,6 +28,10 @@ Daily Biblical Confessions is a beautiful web application designed to strengthen
   - Protection & Safety
 - **Share the Word**: Easily share confessions via WhatsApp or copy to clipboard
 - **Beautiful UI**: Aesthetically pleasing design that enhances the app experience
+
+## 🎨 Color Palette
+
+<img src="public/Practical Faith color palette.png" alt="Practical Faith Color Palette" width="100%" />
 
 ## 🚀 Getting Started
 
