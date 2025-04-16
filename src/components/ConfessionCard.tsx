@@ -2,10 +2,19 @@ import { useState } from "react";
 import { Confession } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Copy, Check, Share2, Sparkles, Trash2 } from "lucide-react";
+import {
+  Copy,
+  Check,
+  Share2,
+  Sparkles,
+  Trash2,
+  Edit2,
+  Save,
+} from "lucide-react";
 import { toast } from "@/components/ui/sonner";
 import { CelebrationModal } from "@/components/CelebrationModal";
-import { deleteConfession } from "@/lib/utils";
+import { deleteConfession, updateConfession } from "@/lib/utils";
+import { Textarea } from "@/components/ui/textarea";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,6 +34,8 @@ export const ConfessionCard = ({
   const [copied, setCopied] = useState(false);
   const [showCelebration, setShowCelebration] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedText, setEditedText] = useState(confession.text);
 
   const getShareText = () => {
     return `"${confession.text}" - ${confession.scripture}`;
@@ -41,7 +52,7 @@ export const ConfessionCard = ({
     if (navigator.share) {
       navigator
         .share({
-          title: "Daily Divine Declaration",
+          title: "Daily Divine Confession",
           text: getShareText(),
         })
         .then(() => {
@@ -82,6 +93,21 @@ export const ConfessionCard = ({
     }
   };
 
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleSave = () => {
+    if (editedText.trim() === "") {
+      toast.error("Confession text cannot be empty");
+      return;
+    }
+    updateConfession(confession.id, editedText);
+    setIsEditing(false);
+    toast.success("Confession updated");
+    onDelete?.(); // Refresh the list
+  };
+
   return (
     <>
       <Card
@@ -93,26 +119,70 @@ export const ConfessionCard = ({
         <div className="absolute top-0 right-0 w-20 h-20 bg-divine-gold/10 rounded-bl-full z-0" />
         <div className="absolute bottom-0 left-0 w-16 h-16 bg-divine-accent/5 rounded-tr-full z-0" />
 
-        {/* Delete button */}
+        {/* Delete and Edit buttons */}
         {showDelete && !confession.scripture && (
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute top-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-red-100"
-            onClick={handleDelete}
-          >
-            <Trash2 className="h-4 w-4 text-red-500" />
-          </Button>
+          <div className="absolute top-2 right-2 z-20 flex space-x-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-blue-100"
+              onClick={handleEdit}
+            >
+              <Edit2 className="h-4 w-4 text-blue-500" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-red-100"
+              onClick={handleDelete}
+            >
+              <Trash2 className="h-4 w-4 text-red-500" />
+            </Button>
+          </div>
         )}
 
         <CardContent className="pt-6 pb-4 px-6 relative z-10">
-          <p className="font-elegant text-xl text-divine-blue leading-relaxed mb-3">
-            "{confession.text}"
-          </p>
-          {confession.scripture && (
-            <p className="text-divine-blue/70 text-sm font-display text-base">
-              {confession.scripture}
-            </p>
+          {isEditing ? (
+            <div className="space-y-2">
+              <Textarea
+                value={editedText}
+                onChange={(e) => setEditedText(e.target.value)}
+                className="font-elegant text-xl text-divine-blue leading-relaxed mb-3 min-h-[100px]"
+                placeholder="Enter your confession..."
+              />
+              <div className="flex justify-end space-x-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setIsEditing(false);
+                    setEditedText(confession.text);
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="default"
+                  size="sm"
+                  onClick={handleSave}
+                  className="bg-divine-blue hover:bg-divine-blue/90"
+                >
+                  <Save className="h-4 w-4 mr-2" />
+                  Save
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <>
+              <p className="font-elegant text-xl text-divine-blue leading-relaxed mb-3">
+                "{confession.text}"
+              </p>
+              {confession.scripture && (
+                <p className="text-divine-blue/70 text-sm font-display text-base">
+                  {confession.scripture}
+                </p>
+              )}
+            </>
           )}
         </CardContent>
 

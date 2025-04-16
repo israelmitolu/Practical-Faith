@@ -22,3 +22,11 @@ export const deleteConfession = (confessionId: string) => {
   const updatedConfessions = confessions.filter((c) => c.id !== confessionId);
   localStorage.setItem("confessions", JSON.stringify(updatedConfessions));
 };
+
+export const updateConfession = (confessionId: string, updatedText: string) => {
+  const confessions = getStoredConfessions();
+  const updatedConfessions = confessions.map((c) =>
+    c.id === confessionId ? { ...c, text: updatedText } : c
+  );
+  localStorage.setItem("confessions", JSON.stringify(updatedConfessions));
+};

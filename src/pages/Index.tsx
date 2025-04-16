@@ -57,7 +57,7 @@ const Index = () => {
       }
     } else {
       // Show both predefined and user confessions when no filter is selected
-      setDisplayedConfessions([...confessions.slice(0, 6), ...userConfessions]);
+      setDisplayedConfessions([...userConfessions, ...confessions.slice(0, 6)]);
     }
   }, [selectedMood, selectedCategory, userConfessions]);
 
