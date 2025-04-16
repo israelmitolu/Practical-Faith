@@ -63,6 +63,48 @@ npm run dev
 
 4. Open your browser and visit `http://localhost:8080`
 
+## 🤝 Contributing
+
+We welcome and appreciate contributions from the community! Whether you're fixing bugs, improving documentation, or adding new features, your help makes Practical Faith better for everyone.
+
+### How to Contribute
+
+1. **Fork the Repository**: Start by forking the repository to your GitHub account.
+
+2. **Set Up Development Environment**: Follow the [Getting Started](#getting-started) guide above.
+
+3. **Create a Branch**: Create a new branch for your feature or fix:
+
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+4. **Make Your Changes**: Implement your changes following our [Code Style Guide](CONTRIBUTING.md#code-style-guide).
+
+5. **Test Your Changes**: Ensure all tests pass and add new tests if needed.
+
+6. **Submit a Pull Request**: Create a PR with a clear description of your changes.
+
+### Contribution Guidelines
+
+Please read our [Contributing Guidelines](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) before contributing. They contain important information about:
+
+- Code style and standards
+- Commit message format
+- Pull request process
+- Testing requirements
+- Community guidelines
+
+### Ways to Contribute
+
+- 🐛 Report and fix bugs
+- 📝 Improve documentation
+- 💡 Suggest new features
+- 🎨 Enhance the UI/UX
+- 🔍 Write tests
+- 🌐 Add translations
+- 📱 Improve mobile responsiveness
+
 ## 🛠️ Tech Stack
 
 - **Frontend**: React 18 with TypeScript
@@ -72,9 +114,7 @@ npm run dev
 - **State Management**: React Query
 - **Routing**: React Router
 
-
-
-## 📞 Contact
+## 🗨️ Contact
 
 For questions, suggestions, or to share testimonies about how this app has blessed you, please open an issue in the repository, or contact me on [Twitter](https://x.com/israelmitolu).
 
