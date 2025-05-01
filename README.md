@@ -31,7 +31,7 @@ Daily Biblical Confessions is a beautiful web application designed to strengthen
 
 ## 🎨 Color Palette
 
-<img src="public/Practical Faith color palette.png" alt="Practical Faith Color Palette" width="100%" />
+![Practical Faith color palette](/public/images/Practical%20Faith%20color%20palette.png)
 
 ## 🚀 Getting Started
 
